@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshipark.cms.mapper.JinshiparkDaysumMapper">
+  <resultMap id="BaseResultMap" type="com.jinshipark.cms.model.JinshiparkDaysum">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="Date" jdbcType="TIMESTAMP" property="date" />
+    <result column="CarSum" jdbcType="VARCHAR" property="carsum" />
+    <result column="ParkFee" jdbcType="VARCHAR" property="parkfee" />
+    <result column="RealParkFee" jdbcType="VARCHAR" property="realparkfee" />
+    <result column="PrePayMoney" jdbcType="VARCHAR" property="prepaymoney" />
+    <result column="ScanPayMoney" jdbcType="VARCHAR" property="scanpaymoney" />
+    <result column="ManualMoney" jdbcType="VARCHAR" property="manualmoney" />
+    <result column="ServiceFee" jdbcType="VARCHAR" property="servicefee" />
+    <result column="ReturnMoney" jdbcType="VARCHAR" property="returnmoney" />
+    <result column="RefundServiceFee" jdbcType="VARCHAR" property="refundservicefee" />
+    <result column="ParkID" jdbcType="VARCHAR" property="parkid" />
+    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, Date, CarSum, ParkFee, RealParkFee, PrePayMoney, ScanPayMoney, ManualMoney, ServiceFee, 
+    ReturnMoney, RefundServiceFee, ParkID, Remarks
+  </sql>
+  <select id="selectByExample" parameterType="com.jinshipark.cms.model.JinshiparkDaysumExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jinshipark_daysum
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jinshipark_daysum
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jinshipark_daysum
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jinshipark.cms.model.JinshiparkDaysumExample">
+    delete from jinshipark_daysum
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jinshipark.cms.model.JinshiparkDaysum">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into jinshipark_daysum (Date, CarSum, ParkFee, 
+      RealParkFee, PrePayMoney, ScanPayMoney, 
+      ManualMoney, ServiceFee, ReturnMoney, 
+      RefundServiceFee, ParkID, Remarks
+      )
+    values (#{date,jdbcType=TIMESTAMP}, #{carsum,jdbcType=VARCHAR}, #{parkfee,jdbcType=VARCHAR}, 
+      #{realparkfee,jdbcType=VARCHAR}, #{prepaymoney,jdbcType=VARCHAR}, #{scanpaymoney,jdbcType=VARCHAR}, 
+      #{manualmoney,jdbcType=VARCHAR}, #{servicefee,jdbcType=VARCHAR}, #{returnmoney,jdbcType=VARCHAR}, 
+      #{refundservicefee,jdbcType=VARCHAR}, #{parkid,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinshipark.cms.model.JinshiparkDaysum">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into jinshipark_daysum
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="date != null">
+        Date,
+      </if>
+      <if test="carsum != null">
+        CarSum,
+      </if>
+      <if test="parkfee != null">
+        ParkFee,
+      </if>
+      <if test="realparkfee != null">
+        RealParkFee,
+      </if>
+      <if test="prepaymoney != null">
+        PrePayMoney,
+      </if>
+      <if test="scanpaymoney != null">
+        ScanPayMoney,
+      </if>
+      <if test="manualmoney != null">
+        ManualMoney,
+      </if>
+      <if test="servicefee != null">
+        ServiceFee,
+      </if>
+      <if test="returnmoney != null">
+        ReturnMoney,
+      </if>
+      <if test="refundservicefee != null">
+        RefundServiceFee,
+      </if>
+      <if test="parkid != null">
+        ParkID,
+      </if>
+      <if test="remarks != null">
+        Remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carsum != null">
+        #{carsum,jdbcType=VARCHAR},
+      </if>
+      <if test="parkfee != null">
+        #{parkfee,jdbcType=VARCHAR},
+      </if>
+      <if test="realparkfee != null">
+        #{realparkfee,jdbcType=VARCHAR},
+      </if>
+      <if test="prepaymoney != null">
+        #{prepaymoney,jdbcType=VARCHAR},
+      </if>
+      <if test="scanpaymoney != null">
+        #{scanpaymoney,jdbcType=VARCHAR},
+      </if>
+      <if test="manualmoney != null">
+        #{manualmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="servicefee != null">
+        #{servicefee,jdbcType=VARCHAR},
+      </if>
+      <if test="returnmoney != null">
+        #{returnmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="refundservicefee != null">
+        #{refundservicefee,jdbcType=VARCHAR},
+      </if>
+      <if test="parkid != null">
+        #{parkid,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jinshipark.cms.model.JinshiparkDaysumExample" resultType="java.lang.Long">
+    select count(*) from jinshipark_daysum
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update jinshipark_daysum
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null">
+        Date = #{record.date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.carsum != null">
+        CarSum = #{record.carsum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parkfee != null">
+        ParkFee = #{record.parkfee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realparkfee != null">
+        RealParkFee = #{record.realparkfee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prepaymoney != null">
+        PrePayMoney = #{record.prepaymoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scanpaymoney != null">
+        ScanPayMoney = #{record.scanpaymoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manualmoney != null">
+        ManualMoney = #{record.manualmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicefee != null">
+        ServiceFee = #{record.servicefee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnmoney != null">
+        ReturnMoney = #{record.returnmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundservicefee != null">
+        RefundServiceFee = #{record.refundservicefee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parkid != null">
+        ParkID = #{record.parkid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        Remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update jinshipark_daysum
+    set id = #{record.id,jdbcType=INTEGER},
+      Date = #{record.date,jdbcType=TIMESTAMP},
+      CarSum = #{record.carsum,jdbcType=VARCHAR},
+      ParkFee = #{record.parkfee,jdbcType=VARCHAR},
+      RealParkFee = #{record.realparkfee,jdbcType=VARCHAR},
+      PrePayMoney = #{record.prepaymoney,jdbcType=VARCHAR},
+      ScanPayMoney = #{record.scanpaymoney,jdbcType=VARCHAR},
+      ManualMoney = #{record.manualmoney,jdbcType=VARCHAR},
+      ServiceFee = #{record.servicefee,jdbcType=VARCHAR},
+      ReturnMoney = #{record.returnmoney,jdbcType=VARCHAR},
+      RefundServiceFee = #{record.refundservicefee,jdbcType=VARCHAR},
+      ParkID = #{record.parkid,jdbcType=VARCHAR},
+      Remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinshipark.cms.model.JinshiparkDaysum">
+    update jinshipark_daysum
+    <set>
+      <if test="date != null">
+        Date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carsum != null">
+        CarSum = #{carsum,jdbcType=VARCHAR},
+      </if>
+      <if test="parkfee != null">
+        ParkFee = #{parkfee,jdbcType=VARCHAR},
+      </if>
+      <if test="realparkfee != null">
+        RealParkFee = #{realparkfee,jdbcType=VARCHAR},
+      </if>
+      <if test="prepaymoney != null">
+        PrePayMoney = #{prepaymoney,jdbcType=VARCHAR},
+      </if>
+      <if test="scanpaymoney != null">
+        ScanPayMoney = #{scanpaymoney,jdbcType=VARCHAR},
+      </if>
+      <if test="manualmoney != null">
+        ManualMoney = #{manualmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="servicefee != null">
+        ServiceFee = #{servicefee,jdbcType=VARCHAR},
+      </if>
+      <if test="returnmoney != null">
+        ReturnMoney = #{returnmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="refundservicefee != null">
+        RefundServiceFee = #{refundservicefee,jdbcType=VARCHAR},
+      </if>
+      <if test="parkid != null">
+        ParkID = #{parkid,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinshipark.cms.model.JinshiparkDaysum">
+    update jinshipark_daysum
+    set Date = #{date,jdbcType=TIMESTAMP},
+      CarSum = #{carsum,jdbcType=VARCHAR},
+      ParkFee = #{parkfee,jdbcType=VARCHAR},
+      RealParkFee = #{realparkfee,jdbcType=VARCHAR},
+      PrePayMoney = #{prepaymoney,jdbcType=VARCHAR},
+      ScanPayMoney = #{scanpaymoney,jdbcType=VARCHAR},
+      ManualMoney = #{manualmoney,jdbcType=VARCHAR},
+      ServiceFee = #{servicefee,jdbcType=VARCHAR},
+      ReturnMoney = #{returnmoney,jdbcType=VARCHAR},
+      RefundServiceFee = #{refundservicefee,jdbcType=VARCHAR},
+      ParkID = #{parkid,jdbcType=VARCHAR},
+      Remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
