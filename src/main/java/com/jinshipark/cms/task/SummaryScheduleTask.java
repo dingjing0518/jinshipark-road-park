@@ -13,7 +13,7 @@ public class SummaryScheduleTask {
     private SummaryScheduleTaskService summaryScheduleTaskService;
 
 //    @Scheduled(cron = "0 0/1 * * * ?")//每分钟
-    @Scheduled(cron = "0 0 1 * * ?")//每天凌晨1点
+//    @Scheduled(cron = "0 0 1 * * ?")//每天凌晨1点
     private void summaryTask() {
         summaryScheduleTaskService.summaryTask();
     }

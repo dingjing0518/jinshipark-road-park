@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
-public class LincensePlateHistory implements Serializable {
+public class JinshiparkOutrecordRoad implements Serializable {
     private Integer lpId;
 
     @ApiModelProperty(value = "会员名")
@@ -16,13 +16,13 @@ public class LincensePlateHistory implements Serializable {
     @ApiModelProperty(value = "服务类型：0：月卡，1：季卡，2：年卡")
     private String lpServiceTypeCar;
 
-    @ApiModelProperty(value = "入站时间")
+    @ApiModelProperty(value = "入场时间")
     private Date lpInboundTime;
 
-    @ApiModelProperty(value = "离站时间")
+    @ApiModelProperty(value = "离场时间")
     private Date lpDepartureTime;
 
-    @ApiModelProperty(value = "租用时间")
+    @ApiModelProperty(value = "是否在场 (租用时间)  在场 、不在场")
     private String lpRentTime;
 
     @ApiModelProperty(value = "创建时间")
@@ -31,10 +31,10 @@ public class LincensePlateHistory implements Serializable {
     @ApiModelProperty(value = "订单id")
     private String lpOrderId;
 
-    @ApiModelProperty(value = "车辆类型，区域名称")
+    @ApiModelProperty(value = "区域名称（原来车辆类型）")
     private String lpCarType;
 
-    @ApiModelProperty(value = "车辆颜色,公司名称")
+    @ApiModelProperty(value = "公司名称（原来是车辆颜色）")
     private String lpCarColor;
 
     @ApiModelProperty(value = "车牌类型")
@@ -85,20 +85,20 @@ public class LincensePlateHistory implements Serializable {
     @ApiModelProperty(value = "出场图片保存路径")
     private String outpicpath;
 
-    @ApiModelProperty(value = "支付ID，退款用")
+    @ApiModelProperty(value = "支付ID")
     private String paymentid;
 
-    @ApiModelProperty(value = "1已退款 0未退款")
+    @ApiModelProperty(value = "1-已退款 0-未退款")
     private String refundstatus;
 
     @ApiModelProperty(value = "退款金额")
     private String refundmoney;
 
-    @ApiModelProperty(value = "支付平台订单ID")
-    private String adaorderid;
-
     @ApiModelProperty(value = "退款手续费")
     private String refundservicefee;
+
+    @ApiModelProperty(value = "支付平台订单ID")
+    private String adaorderid;
 
     private static final long serialVersionUID = 1L;
 
@@ -342,20 +342,20 @@ public class LincensePlateHistory implements Serializable {
         this.refundmoney = refundmoney;
     }
 
-    public String getAdaorderid() {
-        return adaorderid;
-    }
-
-    public void setAdaorderid(String adaorderid) {
-        this.adaorderid = adaorderid;
-    }
-
     public String getRefundservicefee() {
         return refundservicefee;
     }
 
     public void setRefundservicefee(String refundservicefee) {
         this.refundservicefee = refundservicefee;
+    }
+
+    public String getAdaorderid() {
+        return adaorderid;
+    }
+
+    public void setAdaorderid(String adaorderid) {
+        this.adaorderid = adaorderid;
     }
 
     @Override
@@ -394,8 +394,8 @@ public class LincensePlateHistory implements Serializable {
         sb.append(", paymentid=").append(paymentid);
         sb.append(", refundstatus=").append(refundstatus);
         sb.append(", refundmoney=").append(refundmoney);
-        sb.append(", adaorderid=").append(adaorderid);
         sb.append(", refundservicefee=").append(refundservicefee);
+        sb.append(", adaorderid=").append(adaorderid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
